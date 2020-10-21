@@ -108,33 +108,84 @@ namespace telekocsi
 
         static void otos()
         {
-            for (int i = 0; i < autok.Count; i++)
+
+            foreach (var igeny in igenyek)
             {
-                for (int j = 0; j < igenyek.Count; j++)
+                int i = 0;
+                while (i < autok.Count && !(igeny.Indulas == autok[i].Indulas &&
+                    igeny.Cel == autok[i].Cel &&
+                    igeny.Szemelyek <= autok[i].Ferohely))
                 {
-                    if (autok[i].Indulas == igenyek[j].Indulas && autok[i].Cel == igenyek[j].Cel && autok[i].Ferohely > igenyek[j].Szemelyek)
-                    {
-                        Console.WriteLine($"\t{igenyek[j].Azonosito} => {autok[i].Rendszam}");
-                    }
+                    i++;
+                }
+                if (i < autok.Count)
+                {
+                    Console.WriteLine($"{igeny.Azonosito} => {autok[i].Rendszam}");
                 }
             }
         }
 
+
+
+
+
+
+
+
+        //    for (int i = 0; i < autok.Count; i++)
+        //    {
+        //        for (int j = 0; j < igenyek.Count; j++)
+        //        {
+        //            if (autok[i].Indulas == igenyek[j].Indulas && autok[i].Cel == igenyek[j].Cel && 
+        //                autok[i].Ferohely > igenyek[j].Szemelyek)
+        //            {
+        //                Console.WriteLine($"\t{igenyek[j].Azonosito} => {autok[i].Rendszam}");
+        //            }
+        //        }
+        //    }
+        //}
+
         static void hatos()
         {
-            StreamWriter sw = new StreamWriter("utasuzenetek.txt");
-            for (int i = 0; i < igenyek.Count; i++)
+            StreamWriter sw = new StreamWriter("utasvalami.txt");
+            foreach (var igeny in igenyek)
             {
-                for (int j = 0; j < autok.Count; j++)
+                int i = 0;
+                while (i < autok.Count && !(igeny.Indulas == autok[i].Indulas &&
+                    igeny.Cel == autok[i].Cel &&
+                    igeny.Szemelyek <= autok[i].Ferohely))
                 {
-                    if (autok[j].Indulas == igenyek[i].Indulas && autok[j].Cel == igenyek[i].Cel)
-                    {
-                        sw.WriteLine($"{igenyek[i].Azonosito}: Rendszám:{autok[j].Rendszam}: Telefonszám:{autok[j].Telefonszam}");
-                    }
+                    i++;
                 }
-                sw.WriteLine($"{igenyek[i].Azonosito}: Sajnos nem sikerült találni");
+                if (i < autok.Count)
+                {
+                    Console.WriteLine($"{igeny.Azonosito} => {autok[i].Rendszam}");
+                }
+                sw.Close();
             }
-            sw.Close();
+
+
+
+
+
+
+
+
+
+
+            //StreamWriter sw = new StreamWriter("utasuzenetek.txt");
+            //for (int i = 0; i < igenyek.Count; i++)
+            //{
+            //    for (int j = 0; j < autok.Count; j++)
+            //    {
+            //        if (autok[j].Indulas == igenyek[i].Indulas && autok[j].Cel == igenyek[i].Cel)
+            //        {
+            //            sw.WriteLine($"{igenyek[i].Azonosito}: Rendszám:{autok[j].Rendszam}: Telefonszám:{autok[j].Telefonszam}");
+            //        }
+            //    }
+            //    sw.WriteLine($"{igenyek[i].Azonosito}: Sajnos nem sikerült találni");
+            //}
+            //sw.Close();
         }
         static void Main(string[] args)
         {
