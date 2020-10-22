@@ -111,25 +111,14 @@ namespace telekocsi
 
             foreach (var igeny in igenyek)
             {
-                int i = 0;
-                while (i < autok.Count && !(igeny.Indulas == autok[i].Indulas &&
-                    igeny.Cel == autok[i].Cel &&
-                    igeny.Szemelyek <= autok[i].Ferohely))
-                {
-                    i++;
-                }
-                if (i < autok.Count)
+                int i = igeny.VanAuto(autok);
+                
+                if (i > -1)
                 {
                     Console.WriteLine($"{igeny.Azonosito} => {autok[i].Rendszam}");
                 }
             }
         }
-
-
-
-
-
-
 
 
         //    for (int i = 0; i < autok.Count; i++)
@@ -150,16 +139,14 @@ namespace telekocsi
             StreamWriter sw = new StreamWriter("utasvalami.txt");
             foreach (var igeny in igenyek)
             {
-                int i = 0;
-                while (i < autok.Count && !(igeny.Indulas == autok[i].Indulas &&
-                    igeny.Cel == autok[i].Cel &&
-                    igeny.Szemelyek <= autok[i].Ferohely))
-                {
-                    i++;
-                }
-                if (i < autok.Count)
+                int i = igeny.VanAuto(autok);
+                if (i < -1)
                 {
                     Console.WriteLine($"{igeny.Azonosito} => {autok[i].Rendszam}");
+                }
+                else
+                {
+                    Console.WriteLine($"{igeny.Azonosito}: Sajnos nem sikerült autók találni");
                 }
                 sw.Close();
             }
